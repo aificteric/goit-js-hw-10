@@ -1,11 +1,8 @@
-export { fetchCountries };
+async function fetchCountries(name) {
+  const url = `https://restcountries.com/v2/name/${name}?fields=name.official,capital,population,flags.svg,languages`;
+  const response = await fetch(url);
+  const countries = await response.json();
+  return countries;
+}
 
-const fetchCountries = async name => {
-  const response =
-    await fetch(`https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,languages,flags
-    `);
-  if (!response.ok) {
-    throw new Error(response.status);
-  }
-  return await response.json();
-};
+export { fetchCountries };
